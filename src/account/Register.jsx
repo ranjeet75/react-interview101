@@ -22,7 +22,9 @@ function Register() {
             .required('Username is required'),
         password: Yup.string()
             .required('Password is required')
-            .min(6, 'Password must be at least 6 characters')
+            .min(6, 'Password must be at least 6 characters'),
+        role: Yup.string()
+            .required('Role is required')
     });
     const formOptions = { resolver: yupResolver(validationSchema) };
 
@@ -68,6 +70,16 @@ function Register() {
                         <input name="password" type="password" {...register('password')} className={`form-control ${errors.password ? 'is-invalid' : ''}`} />
                         <div className="invalid-feedback">{errors.password?.message}</div>
                     </div>
+
+                    <div className="mb-3">
+                        <label className="form-label">Role</label>
+                        <select name="role" type="" {...register('role')} className={`form-control ${errors.role ? 'is-invalid' : ''}`} >
+                            <option value="User" selected={true}>User</option>
+                            <option value="Auditor">Auditor</option>
+                        </select>
+                        <div className="invalid-feedback">{errors.role?.message}</div>
+                    </div>
+
                     <button disabled={isSubmitting} className="btn btn-primary">
                         {isSubmitting && <span className="spinner-border spinner-border-sm me-1"></span>}
                         Register
