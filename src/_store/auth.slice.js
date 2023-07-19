@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import { alertActions } from '_store';
 import { history, fetchWrapper } from '_helpers';
+const AUDIT_ROUTE = '/audit';
 
 // create slice
 
@@ -59,7 +60,16 @@ function createExtraActions() {
 
                     // get return url from location state or default to home page
                     const { from } = history.location.state || { from: { pathname: '/' } };
-                    history.navigate(from);
+                    /**
+                     * Below script is being overrrides in terms of navigation but i keept it 
+                     * in case we need to refector in the feature
+                     */
+                    if (user.role == 'Auditor') {
+                        history.navigate(AUDIT_ROUTE);
+                    } else {
+                        history.navigate(from);
+                    }
+                    
                 } catch (error) {
                     dispatch(alertActions.error(error));
                 }

@@ -1,7 +1,7 @@
 import { Routes, Route, Navigate, useNavigate, useLocation } from 'react-router-dom';
 
 import { history } from '_helpers';
-import { Nav, Alert, PrivateRoute } from '_components';
+import { Nav, Alert, PrivateRoute, AuditRoute } from '_components';
 import { Home } from 'home';
 import { AccountLayout } from 'account';
 import { UsersLayout } from 'users';
@@ -26,7 +26,7 @@ function App() {
                         <Route path="/" element={<Home />} />
                         <Route path="users/*" element={<UsersLayout />} />
                     </Route>
-                    <Route element={<PrivateRoute />}>
+                    <Route element={<AuditRoute />}>
                         <Route path="/audit" element={<Audit />} />
                      
                     </Route>
